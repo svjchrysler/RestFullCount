@@ -34,7 +34,7 @@ class CarController extends Controller
 
 	public function datos() {
 		$data = CategoryCar::All();
-		return view('welcome')->witch('data', $data);
+		return view('welcome')->with('data', $data);
 	}
 
 }
