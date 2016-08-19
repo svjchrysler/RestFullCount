@@ -31,4 +31,10 @@ class CarController extends Controller
 		$car->save();
 		return "1";
 	}
+
+	public function datos() {
+		$data = CategoryCar::All();
+		return view('welcome')->with('data', $data);
+	}
+
 }
