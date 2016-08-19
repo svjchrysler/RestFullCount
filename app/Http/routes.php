@@ -14,6 +14,4 @@
 Route::post('person/store', 'PersonController@store');
 Route::post('car/store', 'CarController@store');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CarController@datos');
