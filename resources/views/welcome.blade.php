@@ -9,8 +9,19 @@
     </head>
     <body>
         <table>
-            <tr>ff</tr>
-            <tr>sdfsdf</tr>
+            <tr>
+                <td>gdfgfggfd</td>
+                <td>fgsdfsdf</td>
+                <td>fgsdfsdddfgsdfgf</td>
+            </tr>
+            @foreach($data as $dt)
+            <tr>
+                <td>{{ $dt->nombre_encuestador }}</td>
+                <td>{{ $dt->hora_incio }}</td>
+                <td>{{ $dt->fecha }}</td>
+            </tr>
+            @endforeach
+            
 
         </table>
         
