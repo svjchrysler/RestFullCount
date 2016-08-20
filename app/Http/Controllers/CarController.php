@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\CategoryCar;
+use App\CategoryPerson;
 
 class CarController extends Controller
 {
@@ -33,7 +34,11 @@ class CarController extends Controller
 	}
 
 	public function datos() {
-		$data = CategoryCar::All();
+		$dataCar = CategoryCar::All();
+		$dataPerson = CategoryPerson::All();
+		$data = array();
+		array_push($data, $dataCar);
+		array_push($data, $dataPerson);
 		return view('welcome')->with('data', $data);
 	}
 

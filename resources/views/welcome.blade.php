@@ -40,7 +40,7 @@
                         <td>Fecha</td>
                         <td>Nota</td>
                     </tr>
-                    @foreach($data as $dt)
+                    @foreach($data[0] as $dt)
                     <tr>
                         <td>{{ $dt->nombre_encuestador }}</td>
                         <td>{{ $dt->particular }}</td>
@@ -49,6 +49,48 @@
                         <td>{{ $dt->taxi }}</td>
                         <td>{{ $dt->publico }}</td>
                         <td>{{ $dt->repartidor }}</td>
+                        <td>{{ $dt->calle_relevamiento }}</td>
+                        <td>{{ $dt->calle_lateral_a }}</td>
+                        <td>{{ $dt->calle_lateral_b }}</td>
+                        <td>{{ $dt->temperatura }}</td>
+                        <td>{{ $dt->condiciones }}</td>
+                        <td>{{ $dt->hora_inicio.' - '.$dt->hora_fin }}</td>
+                        <td>{{ $dt->fecha }}</td>
+                        <td>{{ $dt->nota }}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Hombre</td>
+                        <td>Ninia</td>
+                        <td>Mujer</td>
+                        <td>Anciano</td>
+                        <td>Calle Relevamiento</td>
+                        <td>Calle A</td>
+                        <td>Calle B</td>
+                        <td>Temperatura</td>
+                        <td>Condiciones</td>
+                        <td>Hora</td>
+                        <td>Fecha</td>
+                        <td>Nota</td>
+                    </tr>
+                    @foreach($data[1] as $dt)
+                    <tr>
+                        <td>{{ $dt->nombre_encuestador }}</td>
+                        <td>{{ $dt->hombre }}</td>
+                        <td>{{ $dt->ninia }}</td>
+                        <td>{{ $dt->mujer }}</td>
+                        <td>{{ $dt->anciano }}</td>
                         <td>{{ $dt->calle_relevamiento }}</td>
                         <td>{{ $dt->calle_lateral_a }}</td>
                         <td>{{ $dt->calle_lateral_b }}</td>
