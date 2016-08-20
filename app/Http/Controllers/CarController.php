@@ -42,4 +42,10 @@ class CarController extends Controller
 		return view('welcome')->with('data', $data);
 	}
 
+	public function getDownload() {
+		$file = public_path()."/download/count.apk";
+
+    	return response()->download($file);
+	}
+
 }
