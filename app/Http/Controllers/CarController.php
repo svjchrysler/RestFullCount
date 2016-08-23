@@ -9,8 +9,11 @@ use App\Http\Requests;
 use App\CategoryCar;
 use App\CategoryPerson;
 
+use Excel;
+
 class CarController extends Controller
 {
+
 	public function  store(Request $req) {
 		$car = new CategoryCar();
 		$car->nombre_encuestador = $req->nombre;
@@ -34,16 +37,70 @@ class CarController extends Controller
 	}
 
 	public function datos() {
-		$dataCar = CategoryCar::All();
-		$dataPerson = CategoryPerson::All();
+		//$dataCar = CategoryCar::All()->orderBy('id', 'asc')->get();
+		/*$dataPerson = CategoryPerson::All();
 		$data = array();
 		array_push($data, $dataCar);
-		array_push($data, $dataPerson);
+		array_push($data, $dataPerson);*/
+		
+		return view('welcome');
+	}
+
+	public function buscar(Request $req) {
+		$dataCar = CategoryCar::orwhere('nombre_encuestador', 'like', '%'.$req->nombre.'%')
+								->orderBy('id', 'asc')
+								->get();
+
+		$dataPeople = CategoryPerson::orwhere('nombre_encuestador', 'like', '%'.$req->nombre.'%')
+								->orderBy('id', 'asc')
+								->get();
+
+		$data = array();
+		array_push($data, $dataCar);
+		array_push($data, $dataPeople);
+
 		return view('welcome')->with('data', $data);
 	}
 
+
+	public function downloadExcel($nombre, $category) {
+		if($category == 1) {
+			$nombrecar = "Datos Vehiculos ". $nombre;
+			
+			Excel::create($nombrecar, function($excel) use($nombre){
+
+		    return 	$excel->sheet('Excel sheet', function($sheet) use($nombre){
+			    		$dataCar = CategoryCar::orwhere('nombre_encuestador', 'like', '%'.$nombre.'%')
+								->orderBy('id', 'asc')
+								->get();
+			    		$sheet->fromArray($dataCar);
+			        	$sheet->setOrientation('landscape');
+
+			    	});
+
+				})->export('xls');
+			}
+			else {
+				$nombreperson = "Datos Personas ". $nombre;
+				Excel::create($nombreperson, function($excel) use($nombre) {
+
+			    return $excel->sheet('Excel sheet', function($sheet) use($nombre){
+			    		$dataPeople = CategoryPerson::orwhere('nombre_encuestador', 'like', '%'.$nombre.'%')
+								->orderBy('id', 'asc')
+								->get();
+			    		$sheet->fromArray($dataPeople);
+			        	$sheet->setOrientation('landscape');
+
+			    	});
+
+				})->export('xls');
+			}	 
+		}
+		
+		
+
 	public function getDownload() {
-		$file = public_path()."/download/count.apk";
+		$file = public_path()."/download/count_ultimate.apk";
 
     	return response()->download($file);
 	}

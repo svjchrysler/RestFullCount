@@ -11,13 +11,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3>Datos Estadisticos</h3>
+                <h3>Datos Encuesta</h3>
             </div>
         </div>    
     </div>
 
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <form class="form-inline" method="post">
+                  <div class="form-group">
+                    <input type="text" name="nombre" class="form-control" id="exampleInputEmail2" placeholder="Buscar...">
+                  </div>
+                  <button type="submit" class="btn btn-default">Buscar</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
 
+    
+    @if(!empty($data))
+    <?php $iduser = 0; ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Datos Vehiculos</h3>
+            </div>
+        </div>    
+    </div>    
     <br><br>
     <div class="container-fluid">
         <div class="row">
@@ -41,6 +64,7 @@
                         <td>Nota</td>
                     </tr>
                     @foreach($data[0] as $dt)
+                    <?php $iduser = $dt->nombre_encuestador; ?>
                     <tr>
                         <td>{{ $dt->nombre_encuestador }}</td>
                         <td>{{ $dt->particular }}</td>
@@ -67,6 +91,28 @@
 
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-right">
+                <a href="excel/{{ $iduser }}/1" class="btn btn-success">Descargar</a>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Datos Personas</h3>
+            </div>
+        </div>    
+    </div>    
+
+
+
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-md-12">
                 <table class="table table-striped table-bordered">
                     <tr>
@@ -85,6 +131,7 @@
                         <td>Nota</td>
                     </tr>
                     @foreach($data[1] as $dt)
+                    <?php $iduser = $dt->nombre_encuestador; ?>
                     <tr>
                         <td>{{ $dt->nombre_encuestador }}</td>
                         <td>{{ $dt->hombre }}</td>
@@ -105,7 +152,18 @@
             </div>
         </div>
     </div>
-    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-right">
+                <a href="excel/{{ $iduser }}/2" class="btn btn-success">Descargar</a>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+
+    @endif
         
         
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
